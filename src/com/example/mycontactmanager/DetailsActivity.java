@@ -9,8 +9,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -18,11 +18,33 @@ import android.widget.Toast;
 
 public class DetailsActivity extends Activity
 {
+	private ImageButton _call;
+	private ImageButton _sms;
 	private ImageButton _icon;
 	private EditText _name;
 	private EditText _phoneNumber;
 	private String _id;
 	private String _imagePath = "";
+	private OnClickListener _callOnClick = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			Uri tel = Uri.parse("tel:" + _phoneNumber.getText().toString());
+			Intent composer = new Intent(Intent.ACTION_DIAL, tel);
+			startActivity(composer);
+		}
+	};
+	
+	private OnClickListener _smsOnClick = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			Uri sms = Uri.parse("sms:" + _phoneNumber.getText().toString());
+			Intent composer = new Intent(Intent.ACTION_VIEW, sms);
+			startActivity(composer);
+		}
+	};
+	
 	private OnClickListener _iconOnClick = new OnClickListener() {
 
 		@Override
@@ -54,6 +76,8 @@ public class DetailsActivity extends Activity
 		Typeface typeFace = Typeface.createFromAsset(getApplicationContext().getAssets(),"fonts/ArchitectsDaughter.ttf");
 		this._imagePath = extras.getString("image_path");
 		this._id = extras.getString("id");
+		_call = (ImageButton)findViewById(R.id.details_call);
+		_sms = (ImageButton)findViewById(R.id.details_sms);
 		_icon = (ImageButton)findViewById(R.id.details_icon);
 		_name = (EditText)findViewById(R.id.details_name);
 		_phoneNumber = (EditText)findViewById(R.id.details_phone_number);
@@ -69,6 +93,8 @@ public class DetailsActivity extends Activity
 		}
 		
 		this._icon.setOnClickListener(_iconOnClick);
+		this._call.setOnClickListener(_callOnClick);
+		this._sms.setOnClickListener(_smsOnClick);
 		save.setOnClickListener(_saveOnClick);
 	}
 	
