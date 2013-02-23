@@ -18,5 +18,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="description">Contact picture</string>
+    <string name="send_message">Send message</string>
+    <string name="search">Search</string>
 
 </resources>

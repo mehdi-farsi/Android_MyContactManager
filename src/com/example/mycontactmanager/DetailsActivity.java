@@ -40,7 +40,6 @@ public class DetailsActivity extends Activity
 		}
 	};
 
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
